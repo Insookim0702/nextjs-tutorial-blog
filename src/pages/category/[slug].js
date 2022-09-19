@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Layout from "components/Layout";
 import SubLayout from "components/SubLayout";
 import { useRouter } from "next/router";
