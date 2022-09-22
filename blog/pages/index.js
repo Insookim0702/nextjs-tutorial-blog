@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Image from 'next/image'
 import Link from 'next/link'
 
 export default function Home() {
@@ -10,6 +11,8 @@ export default function Home() {
       </Head>
 
       <main>
+        <img src="/public/siba.png" />
+        <Image src="/public/siba.png" width={140} height={140} />
         <Link href="/posts/first-post">첫번째 글로 이동</Link>
         <h1 className="title">
           Welcome to <a href="https://nextjs.org">Next.js!</a>
