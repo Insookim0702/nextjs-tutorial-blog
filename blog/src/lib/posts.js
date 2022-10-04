@@ -66,3 +66,15 @@ export function getAllPostIds() {
     }
   })
 }
+
+export async function createPost({ title, content, date }) {
+  const fullPath = path.join(postsDirectory, `${title}.md`)
+
+  const data = `---
+    title: ${title},
+    date: ${date}
+    ---
+    ${content}
+  `
+  fs.writeFileSync(fullPath, data)
+}
