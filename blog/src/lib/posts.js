@@ -39,6 +39,7 @@ export function getSortedPostsData() {
 }
 
 export async function getPostData(id) {
+  console.log(getPostData)
   const fullPath = path.join(postsDirectory, `${id}.md`)
   const fileContents = fs.readFileSync(fullPath, 'utf8')
   const matterResult = matter(fileContents)
@@ -71,10 +72,11 @@ export async function createPost({ title, content, date }) {
   const fullPath = path.join(postsDirectory, `${title}.md`)
 
   const data = `---
-    title: ${title},
-    date: ${date}
-    ---
-    ${content}
+title: '${title}'
+date: '${date}'
+---
+
+${content}
   `
   fs.writeFileSync(fullPath, data)
 }

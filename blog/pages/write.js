@@ -1,7 +1,8 @@
 import { useRef } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
-export default function Write() {
+export default function Write({ postData }) {
+  console.log('postData', postData)
   const title = useRef(undefined)
   const content = useRef(undefined)
   function onSubmit(event) {
@@ -41,9 +42,9 @@ export default function Write() {
       <header>글쓰기</header>
       <form onSubmit={onSubmit}>
         <h1>제목</h1>
-        <input ref={title} />
+        <input ref={title} value={postData?.id} />
         <h1>내용</h1>
-        <textarea ref={content} />
+        <textarea ref={content} value={postData?.content} />
         <br />
         <input type="submit" />
       </form>

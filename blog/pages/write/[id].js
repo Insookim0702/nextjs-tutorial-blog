@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import Write from '/pages/Write'
 /**
  * @description CSR
@@ -9,19 +9,26 @@ export default function WriteId() {
     query: { id },
     isReady,
   } = useRouter()
+  const [postData, setPostData] = useState(null)
 
   useEffect(() => {
     if (!isReady) return
-    console.log(id)
-    fetch(`/posts/${id}`)
-      .then((res) => res.json())
+    fetch(`/posts/${id}`, {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+    })
       .then((res) => {
-        console.log(res)
+        if (res.ok) {
+          return res.json()
+          // return res
+        }
+        throw new Error('Fetch Error')
+      })
+      .then((res) => {
+        console.log('????', res)
+        setPostData(res)
+        console.log('writeId', postData)
       })
   }, [isReady])
-  return (
-    <>
-      <Write />
-    </>
-  )
+  return <>{postData ? <Write postData={postData} /> : <div>Loading...</div>}</>
 }
